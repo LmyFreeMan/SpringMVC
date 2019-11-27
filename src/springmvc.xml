@@ -42,6 +42,10 @@
             </list>
         </property>
     </bean>
+<!--    &lt;!&ndash;统一的异常处理&ndash;&gt;-->
+<!--    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">-->
+<!--        <property name="defaultErrorView" value="exception"></property>-->
+<!--    </bean>-->
     <!--设置编码集-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
     <!--设置默认的请求字符的编码集-->
@@ -49,6 +53,7 @@
     <!-- 设置上传的最大字节-->
         <property name="maxUploadSize"   value="5242880"></property>
     </bean>
+    <bean id="exceptionHandler" class="com.web.demo.exception.SpringMVCException"></bean>
     <!--bean验证-->
     <!-- 引入动态资源-->
     <mvc:default-servlet-handler />
