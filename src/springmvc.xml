@@ -13,6 +13,17 @@
         <property name = "prefix" value="/WEB-INF/jsp/"></property>
         <property name = "suffix" value = ".jsp"></property>
     </bean>
+        <!-- 添加拦截器-->
+<!--        <mvc:interceptors>-->
+<!--            <bean class="com.web.demo.intercepter.LogInterceptor" />-->
+<!--        &lt;!&ndash; 用户登录校验的拦截器配置&ndash;&gt;-->
+<!--            <mvc:interceptor>-->
+<!--                <mvc:mapping path="/**" />-->
+<!--            &lt;!&ndash;不进行的url拦截&ndash;&gt;-->
+<!--                <mvc:exclude-mapping path="/login.do" />-->
+<!--                <bean class="com.web.demo.intercepter.LoginInterceptor" />-->
+<!--            </mvc:interceptor>-->
+<!--        </mvc:interceptors>-->
         <!--自定义日期类型转化器-->
 <!--    <mvc:annotation-driven conversion-service="dateFormatConverter"/>-->
 <!--        <bean id="dateFormatConverter" class="org.springframework.format.support.FormattingConversionServiceFactoryBean" >-->
@@ -21,7 +32,6 @@
 <!--            </property>-->
 
 <!--        </bean>-->
-
         <!--字符串转json-->
         <mvc:annotation-driven validator="validator"/>
 <!--    <bean id="dateFormatConverter" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">-->
@@ -55,9 +65,8 @@
     </bean>
     <bean id="exceptionHandler" class="com.web.demo.exception.SpringMVCException"></bean>
     <!--bean验证-->
-    <!-- 引入动态资源-->
+    <!-- 配置处理静态资源，由servlet容器进行管理，不受spring拦截-->
     <mvc:default-servlet-handler />
-
-
-
+    <!--静态资源文件受Spring管理,并且提供许多优化-->
+    <!--<mvc:resources mapping="映射url" location="资源路径" cache-period="保存周期"></mvc:resources>-->
 </beans>
