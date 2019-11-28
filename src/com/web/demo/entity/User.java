@@ -4,6 +4,15 @@ package com.web.demo.entity;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class User {
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
+    }
+
     private int id;
     public int getId() {
         return id;
