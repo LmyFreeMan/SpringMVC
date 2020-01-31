@@ -6,7 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+
+import java.util.Map;
+
 @RequestMapping("/data")
+//将user对象放入session域中
 @SessionAttributes("user")
 @Controller
 public class ModelDataController {
@@ -17,25 +21,32 @@ public class ModelDataController {
     * 将方法入参对象添加到模型中
     * @SessionAttributes除了可以通过属性名指定需要放到会话中的属性外，还可以通过模型属性的对象类型指定哪些模型属性需要放到会话中
     * */
+//    @ModelAttribute
+    @RequestMapping("/findById")
+
+    public String findById(Student student,Map map){
+      System.out.println(student);
+       System.out.println(555);
+//        if(student==null)
+//            student=new Student();
+//        student.setStuNo(55);
+//        student.setStuName("x");
+//        student.setClassId(5);
+//        System.out.println(student);
+//        //改变下面ModelAttribute的name值
+//        map.put("stu",student);
+        return "index";
+    }
     @RequestMapping("/model")
-    public String model(@ModelAttribute("student") Student student){
+    public String model(@ModelAttribute("stu") Student student){
+            System.out.println("进入model");
             System.out.println(student);
              return "index";
     }
-
-    @RequestMapping("/findById")
-    public String findById(User user){
-        if(user==null)
-            user=new User();
-        user.setId(1);
-        user.setUsername("admin");
-        user.setPhone("65565656");
-        System.out.println(user);
-        return "index";
-    }
-    @RequestMapping("/detail")
-    public String detail(User user){
-        System.out.println(user);
+    //@ModelAttribute
+    public String detail(@ModelAttribute("stu") Student student){
+        System.out.println("进入detail");
+        System.out.println(student);
         return "index";
     }
 
