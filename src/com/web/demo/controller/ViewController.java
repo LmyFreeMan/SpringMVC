@@ -31,6 +31,7 @@ public class ViewController {
         return model;
     }
     //重定向
+    //这种方式,不会被视图解析器加上前缀，后缀，需要加上全路径
     @RequestMapping("/redirect")
     public String redirect(){
         return "redirect:string.do";
