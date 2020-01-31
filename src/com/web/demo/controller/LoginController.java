@@ -1,16 +1,13 @@
 package com.web.demo.controller;
-
 import com.web.demo.entity.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 @Controller
 public class LoginController {
-    @RequestMapping("/login.do")
+    @RequestMapping("/login.do" )
     public String login(HttpServletRequest request, HttpServletResponse response){
             String username=request.getParameter("username");
             System.out.println(username);
