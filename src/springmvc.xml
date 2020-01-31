@@ -7,7 +7,7 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
     <!-- 配置自动扫描的包 -->
-    <context:component-scan base-package="com.web.demo.controller"></context:component-scan>
+    <context:component-scan base-package="com.web.demo.controller,com.web.demo.exception"></context:component-scan>
     <!-- 配置视图解析器 如何把handler 方法返回值解析为实际的物理视图 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name = "prefix" value="/WEB-INF/jsp/"></property>
@@ -45,28 +45,44 @@
         <!--国际化-->
         <property name="validationMessageSource" ref="messageSource"></property>
     </bean>
-    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-        <property name="basenames">
-            <list>
-                <value>classpath:messages</value>
-            </list>
-        </property>
+    <!--加载国际化资源文件，id为messageSource自动加载-->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames" value="messages"></property>
     </bean>
-<!--    &lt;!&ndash;统一的异常处理&ndash;&gt;-->
+    <!--统一的异常处理-->
 <!--    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">-->
 <!--        <property name="defaultErrorView" value="exception"></property>-->
+<!--    &lt;!&ndash;把变量ex放到request作用域里面，默认值为exception&ndash;&gt;-->
+<!--        <property name="exceptionAttribute" value="ex"></property>-->
+<!--        &lt;!&ndash;配置异常&ndash;&gt;-->
+<!--        <property name="exceptionMappings">-->
+<!--            <props>-->
+<!--        &lt;!&ndash;跳转到error.jsp页面&ndash;&gt;-->
+<!--                <prop key="java.lang.ArithmeticException">error</prop>-->
+<!--            </props>-->
+<!--        </property>-->
 <!--    </bean>-->
-    <!--设置编码集-->
+<!--    配置数据格式化所依赖的bean-->
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean"></bean>
+    <!--SpringIOC初始化时，会自动寻找一个实现id="multipartResolver"，文件上传-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
     <!--设置默认的请求字符的编码集-->
         <property name="defaultEncoding" value="UTF-8"></property>
-    <!-- 设置上传的最大字节-->
+    <!-- 设置上传的最大字节,单位Byte-->
         <property name="maxUploadSize"   value="5242880"></property>
     </bean>
-    <bean id="exceptionHandler" class="com.web.demo.exception.SpringMVCException"></bean>
+<!--    <bean id="exceptionHandler" class="com.web.demo.exception.SpringMVCException"></bean>-->
+    <!--由指定的路径到视图-->
+<!--    <mvc:view-controller path="hanler/welcome" view-name="success.jsp"/>-->
     <!--bean验证-->
+
     <!-- 配置处理静态资源，由servlet容器进行管理，不受spring拦截-->
     <mvc:default-servlet-handler />
+    <!--此配置是springmvc的基础配置，好多配置都需要通过该注解来协调-->
+    <mvc:annotation-driven />
     <!--静态资源文件受Spring管理,并且提供许多优化-->
-    <!--<mvc:resources mapping="映射url" location="资源路径" cache-period="保存周期"></mvc:resources>-->
+    <mvc:resources location="static/img/" mapping="/img/**"/>
+    <mvc:resources location="static/js/" mapping="/js/**"/>
+    <mvc:resources location="static/css/" mapping="/css/**"/>
+    <mvc:resources location="static/fonts/" mapping="/fonts/**"/>
 </beans>
