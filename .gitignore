@@ -11,10 +11,10 @@
 *.iml
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
-.idea
+.idea/
 out
-artifacts
-libraries
+artifacts/
+libraries/
 # Package Files #
 *.jar
 *.war
