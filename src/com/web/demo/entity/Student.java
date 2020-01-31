@@ -1,6 +1,9 @@
 package com.web.demo.entity;
 
+import javax.validation.constraints.NotNull;
+
 public class Student {
+    @NotNull
     private int stuNo;
 
     public int getStuNo() {
@@ -15,7 +18,6 @@ public class Student {
                 ", classId=" + classId +
                 '}';
     }
-
     public void setStuNo(int stuno) {
         this.stuNo = stuno;
     }
