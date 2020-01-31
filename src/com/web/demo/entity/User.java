@@ -39,7 +39,7 @@ public class User {
   //  @NotEmpty(message="用户名不能为空")
      @NotEmpty(message = "{username.not.empty}")
     private String username;
-   // @NotEmpty(message="手机号码不能为空")
-    @NotEmpty(message = "{phone.not.empty}")
+   @NotEmpty(message="手机号码不能为空")
+   // @NotEmpty(message = "{phone.not.empty}")
     private String phone;
 }
